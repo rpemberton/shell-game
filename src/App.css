@@ -1,0 +1,44 @@
+.App {
+  color: #4a4a4a;
+
+  text-align: center;
+}
+
+.game-result-text {
+  color: purple;
+}
+
+.game-table {
+  margin: 20px auto;
+  height: 600px;
+  width: 800px;
+
+  background: #e4e4e4;
+}
+
+.game-shell {
+  position: absolute;
+  display: flex;
+
+  width: 100px;
+  height: 100px;
+
+  background: #f47100;
+  justify-content: center;
+  align-items: center;
+
+  cursor: pointer;
+  transition: transform 700ms;
+  will-change: transform;
+}
+
+.game-ball {
+  width: 50px;
+  height: 50px;
+
+  border-radius: 50%;
+  background: purple;
+  opacity: 0;
+
+  transition: opacity 500ms;
+}
