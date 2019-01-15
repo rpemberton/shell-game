@@ -1,44 +1,100 @@
 .App {
-  color: #4a4a4a;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 40px;
+}
+
+button:hover {
+  box-shadow: 0px 2px 5px rgba(0,0,0,.2);
+}
+
+.board {
+  position: relative;
+  margin: 20px auto;
+  width: 100%;
+
+  outline: 5px solid #333;
+}
+
+.board__result {
+  position: absolute;
+  top: 40px;
+  width: 100%;
 
   text-align: center;
+  font-weight: bold;
 }
 
-.game-result-text {
-  color: purple;
-}
-
-.game-table {
-  margin: 20px auto;
-  height: 600px;
-  width: 800px;
-
-  background: #e4e4e4;
-}
-
-.game-shell {
+.shell {
   position: absolute;
   display: flex;
 
   width: 100px;
   height: 100px;
+  padding: 0;
 
-  background: #f47100;
   justify-content: center;
   align-items: center;
+  background: #039be5;
+  border: none;
+  border-radius: 5px;
 
   cursor: pointer;
-  transition: transform 700ms;
+  transition: transform 450ms;
   will-change: transform;
 }
 
-.game-ball {
+.ball {
   width: 50px;
   height: 50px;
 
   border-radius: 50%;
-  background: purple;
+  background: #ffa000;
   opacity: 0;
+}
 
-  transition: opacity 500ms;
+.ball--win {
+  opacity: 1;
+}
+
+.ball--start {
+  animation-name: fadeInOut;
+  animation-duration: 1.5s;
+}
+
+@keyframes fadeInOut {
+  50% { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.form {
+  display: flex;
+  margin: 20px 0;
+}
+
+.form__options {
+  margin-top: 20px;
+  margin-left: auto;
+}
+
+.form__label {
+  margin-left: 10px;
+}
+
+.form__label input {
+  margin: 0 5px;
+}
+
+.form__btn {
+  padding: 10px 20px;
+
+  background: #3c587c;
+  border-radius: 5px;
+  border: none;
+
+  font-weight: bold;
+  color: white;
 }
