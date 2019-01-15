@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/street-game/precache-manifest.9e64852217eb6854c42f2f11ed41681d.js"
+  "/street-game/precache-manifest.fdaf80581e5a2c745c099bef238dea25.js"
 );
 
 workbox.clientsClaim();
