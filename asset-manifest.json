@@ -1,13 +1,13 @@
 {
-  "main.css": "/street-game/static/css/main.ed203f9f.chunk.css",
-  "main.js": "/street-game/static/js/main.91443006.chunk.js",
-  "main.js.map": "/street-game/static/js/main.91443006.chunk.js.map",
-  "static/js/1.4a34e45d.chunk.js": "/street-game/static/js/1.4a34e45d.chunk.js",
-  "static/js/1.4a34e45d.chunk.js.map": "/street-game/static/js/1.4a34e45d.chunk.js.map",
-  "runtime~main.js": "/street-game/static/js/runtime~main.02ed7425.js",
-  "runtime~main.js.map": "/street-game/static/js/runtime~main.02ed7425.js.map",
-  "static/css/main.ed203f9f.chunk.css.map": "/street-game/static/css/main.ed203f9f.chunk.css.map",
-  "index.html": "/street-game/index.html",
-  "precache-manifest.fdaf80581e5a2c745c099bef238dea25.js": "/street-game/precache-manifest.fdaf80581e5a2c745c099bef238dea25.js",
-  "service-worker.js": "/street-game/service-worker.js"
+  "main.css": "/shell-game/static/css/main.ed203f9f.chunk.css",
+  "main.js": "/shell-game/static/js/main.3516a55c.chunk.js",
+  "main.js.map": "/shell-game/static/js/main.3516a55c.chunk.js.map",
+  "static/js/1.4a34e45d.chunk.js": "/shell-game/static/js/1.4a34e45d.chunk.js",
+  "static/js/1.4a34e45d.chunk.js.map": "/shell-game/static/js/1.4a34e45d.chunk.js.map",
+  "runtime~main.js": "/shell-game/static/js/runtime~main.d1f85537.js",
+  "runtime~main.js.map": "/shell-game/static/js/runtime~main.d1f85537.js.map",
+  "static/css/main.ed203f9f.chunk.css.map": "/shell-game/static/css/main.ed203f9f.chunk.css.map",
+  "index.html": "/shell-game/index.html",
+  "precache-manifest.d43976166a4a1bc292e1f0ec766db780.js": "/shell-game/precache-manifest.d43976166a4a1bc292e1f0ec766db780.js",
+  "service-worker.js": "/shell-game/service-worker.js"
 }
