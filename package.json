@@ -1,8 +1,8 @@
 {
-  "name": "street-game",
+  "name": "shell-game",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://rpemberton.github.io/street-game",
+  "homepage": "https://rpemberton.github.io/shell-game",
   "dependencies": {
     "react": "^16.7.0",
     "react-dom": "^16.7.0",

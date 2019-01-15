@@ -1,8 +1,8 @@
-# Game of Shells
+# Shell game
 
-Based on an old [street game](https://en.wikipedia.org/wiki/Shell_game)
+Based on an old [street game](https://en.wikipedia.org/wiki/Shell_game).
 
-Demo: https://rpemberton.github.io/street-game
+Demo: https://rpemberton.github.io/shell-game
 
 ![screenshot](docs/screenshot.gif)
 

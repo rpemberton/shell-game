@@ -182,7 +182,7 @@ class App extends Component {
 
     return (
       <div className="App" style={{ width: this.boardWidth }}>
-        <h1>Game of Shells</h1>
+        <h1>Shell game</h1>
 
         <form className="form" onSubmit={this.handleStartGame}>
           <div>
