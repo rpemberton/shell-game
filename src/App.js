@@ -1,64 +1,47 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import './App.css';
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      history: [
-        [
-          { x: 150, y: 100, hasBall: false },
-          { x: 300, y: 100, hasBall: false },
-          { x: 450, y: 100, hasBall: false },
-        ]
-      ],
-      numMovesLimitLocked: 3,
-      numMovesLimit: 3,
-      shellChoice: null,
-    };
+function App() {
+  const [history, setHistory] = useState([
+    [
+      { x: 150, y: 100, hasBall: false },
+      { x: 300, y: 100, hasBall: false },
+      { x: 450, y: 100, hasBall: false },
+    ]
+  ]);
+  const [numMovesLimitLocked, setNumMovesLimitLocked] = useState(3);
+  const [numMovesLimit, setNumMovesLimit] = useState(3);
+  const [shellChoice, setShellChoice] = useState(null);
+  const boardWidth = 700;
+  const boardHeight = 500;
+  let numTransitions = 0;
 
-    this.boardWidth = 700;
-    this.boardHeight = 500;
-    this.numTransitions = 0;
+  function numMovesDone() {
+    return history.length - 1;
   }
 
-  numMovesDone() {
-    return this.state.history.length - 1;
+  function isStarted() {
+    return history[0].some(shell => shell.hasBall);
   }
 
-  // Step 1
-  isStarted() {
-    return this.state.history[0].some(shell => shell.hasBall);
+  function isBallVisible() {
+    return history.length === 1 && isStarted();
   }
 
-  // Step 1.1
-  isBallVisible() {
-    return this.state.history.length === 1 && this.isStarted();
+  function isFinished() {
+    return numMovesDone() === numMovesLimitLocked;
   }
 
-  // Step 2
-  isShuffling() {
-    return this.state.history.length > 1 && this.numMovesDone() < this.state.numMovesLimitLocked;
+  function handleDifficultyChange(e) {
+    setNumMovesLimit(Number(e.target.value));
   }
 
-  // Step 3
-  isFinished() {
-    return this.numMovesDone() === this.state.numMovesLimitLocked;
-  }
-
-  handleDifficultyChange = e => {
-    e.persist();
-    this.setState({
-      numMovesLimit: parseInt(e.target.value, 10)
-    });
-  }
-
-  handleStartGame = e => {
+  function handleStartGame(e) {
     e.preventDefault();
 
-    this.numTransitions = 0;
+    numTransitions = 0;
 
-    const currShells = this.state.history[this.state.history.length - 1];
+    const currShells = history[history.length - 1];
     const winningIndex = Math.floor(Math.random() * currShells.length);
     const newShells = currShells.map((shell, shellIndex) => {
       const newShell = Object.assign({}, shell);
@@ -66,23 +49,20 @@ class App extends Component {
       return newShell;
     });
 
-    this.setState({
-      history: [newShells],
-      shellChoice: null,
-      numMovesLimitLocked: this.state.numMovesLimit
-    });
+    setHistory([newShells]);
+    setShellChoice(null);
+    setNumMovesLimitLocked(numMovesLimit);
   }
 
-  handleTransitionEnd = () => {
-    this.numTransitions++;
-    if (this.numTransitions % 3 === 0) {
-      this.shuffleShells();
+  function handleTransitionEnd() {
+    numTransitions++;
+    if (numTransitions % 3 === 0) {
+      shuffleShells();
     }
   }
 
-  generateNewPositions() {
+  function generateNewPositions() {
     const shellSize = 100;
-    const { boardWidth, boardHeight } = this;
 
     function generateNewPosition(position) {
       position.x = Math.floor(Math.random() * (boardWidth - shellSize));
@@ -98,7 +78,7 @@ class App extends Component {
       });
     }
 
-    const newPositions = this.state.history[this.state.history.length - 1]
+    const newPositions = history[history.length - 1]
       .reduce((acc, cur) => {
         const shell = Object.assign({}, cur);
         let newPos = generateNewPosition(shell);
@@ -114,24 +94,21 @@ class App extends Component {
     return newPositions;
   }
 
-  shuffleShells = () => {
-    if (this.isFinished()) {
+  function shuffleShells() {
+    if (isFinished()) {
       return;
     }
 
-    const { history, numMovesLimit } = this.state;
-    const isFinalMove = this.numMovesDone() === numMovesLimit - 1;
+    const isFinalMove = numMovesDone() === numMovesLimitLocked - 1;
 
     const newShellPositions = isFinalMove
-      ? this.finalShuffle(history[0])
-      : this.generateNewPositions();
+      ? finalShuffle(history[0])
+      : generateNewPositions();
 
-    this.setState({
-      history: history.concat([newShellPositions]),
-    });
+    setHistory(history.concat([newShellPositions]));
   }
 
-  finalShuffle(shells) {
+  function finalShuffle(shells) {
     const avalablePositions = shells.map(({ x }) => x);
 
     const shuffledShells = shells.map(shell => {
@@ -144,17 +121,10 @@ class App extends Component {
     return shuffledShells;
   }
 
-  render() {
-    const {
-      history,
-      numMovesLimit,
-      numMovesLimitLocked,
-      shellChoice,
-    } = this.state;
-
+  function getBallClassNames() {
     const ballClassNames = ['ball'];
 
-    if (this.isBallVisible()) {
+    if (isBallVisible()) {
       ballClassNames.push('ball--start');
     }
 
@@ -162,83 +132,87 @@ class App extends Component {
       ballClassNames.push('ball--win');
     }
 
-    const Ball = () => <div
-      className={ballClassNames.join(' ')}
-      onAnimationEnd={this.shuffleShells}>
-    </div>
-
-    const shellElements = history[history.length - 1]
-      .map((shell, index) =>
-        <button
-          key={index}
-          className="shell"
-          onClick={() => this.setState({ shellChoice: shell })}
-          onTransitionEnd={this.handleTransitionEnd}
-          style={{transform: `translate(${shell.x}px, ${shell.y}px)`}}
-          disabled={!this.isFinished()}>
-          { shell.hasBall && <Ball/> }
-        </button>
-      );
-
-    return (
-      <div className="App" style={{ width: this.boardWidth }}>
-        <h1>Shell game</h1>
-
-        <form className="form" onSubmit={this.handleStartGame}>
-          <div>
-            <button
-              type="submit"
-              className="form__btn"
-              disabled={this.isStarted() && this.numMovesDone() < numMovesLimitLocked}>
-              START
-            </button>
-          </div>
-
-          <div className="form__options">
-            <label className="form__label">
-              <input
-                type="radio"
-                name="difficulty"
-                value="3"
-                onChange={this.handleDifficultyChange}
-                checked={numMovesLimit === 3}
-                disabled={this.isStarted() && !this.isFinished()}/>
-                Beginner
-            </label>
-
-            <label className="form__label">
-              <input
-                type="radio"
-                name="difficulty"
-                value="5"
-                onChange={this.handleDifficultyChange}
-                checked={numMovesLimit === 5}
-                disabled={this.isStarted() && !this.isFinished()}/>
-                Intermediate
-            </label>
-
-            <label className="form__label">
-              <input
-                type="radio"
-                name="difficulty"
-                value="10"
-                onChange={this.handleDifficultyChange}
-                checked={numMovesLimit === 10}
-                disabled={this.isStarted() && !this.isFinished()}/>
-                Expert
-            </label>
-          </div>
-        </form>
-
-        <div className="board" style={{ height: this.boardHeight }}>
-          <div className="board__result">
-            { shellChoice && (shellChoice.hasBall ? 'FOUND IT!' : 'TRY ANOTHER') }
-          </div>
-          {shellElements}
-        </div>
-      </div>
-    );
+    return ballClassNames.join(' ');
   }
+
+  function Ball() {
+    return <div
+      className={getBallClassNames()}
+      onAnimationEnd={shuffleShells}>
+    </div>
+  }
+
+  const shellElements = history[history.length - 1]
+    .map((shell, index) =>
+      <button
+        key={index}
+        className="shell"
+        onClick={() => setShellChoice(shell)}
+        onTransitionEnd={handleTransitionEnd}
+        style={{transform: `translate(${shell.x}px, ${shell.y}px)`}}
+        disabled={!isFinished()}>
+        { shell.hasBall && <Ball/> }
+      </button>
+    );
+
+  return (
+    <div className="App" style={{ width: boardWidth }}>
+      <h1>Shell game</h1>
+
+      <form className="form" onSubmit={handleStartGame}>
+        <div>
+          <button
+            type="submit"
+            className="form__btn"
+            disabled={isStarted() && numMovesDone() < numMovesLimitLocked}>
+            START
+          </button>
+        </div>
+
+        <div className="form__options">
+          <label className="form__label">
+            <input
+              type="radio"
+              name="difficulty"
+              value="3"
+              onChange={handleDifficultyChange}
+              checked={numMovesLimit === 3}
+              disabled={isStarted() && !isFinished()}/>
+              Beginner
+          </label>
+
+          <label className="form__label">
+            <input
+              type="radio"
+              name="difficulty"
+              value="5"
+              onChange={handleDifficultyChange}
+              checked={numMovesLimit === 5}
+              disabled={isStarted() && !isFinished()}/>
+              Intermediate
+          </label>
+
+          <label className="form__label">
+            <input
+              type="radio"
+              name="difficulty"
+              value="10"
+              onChange={handleDifficultyChange}
+              checked={numMovesLimit === 10}
+              disabled={isStarted() && !isFinished()}/>
+              Expert
+          </label>
+        </div>
+      </form>
+
+      <div className="board" style={{ height: boardHeight }}>
+        <div className="board__result">
+          { shellChoice && (shellChoice.hasBall ? 'FOUND IT!' : 'TRY ANOTHER') }
+        </div>
+        {shellElements}
+      </div>
+    </div>
+  )
 }
 
 export default App;
