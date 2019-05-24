@@ -144,7 +144,8 @@ function App() {
 
   const shellElements = history[history.length - 1]
     .map((shell, index) =>
-      <button
+      <div
+        role="button"
         key={index}
         className="shell"
         onClick={() => setShellChoice(shell)}
@@ -152,7 +153,7 @@ function App() {
         style={{transform: `translate(${shell.x}px, ${shell.y}px)`}}
         disabled={!isFinished()}>
         { shell.hasBall && <Ball/> }
-      </button>
+      </div>
     );
 
   return (
