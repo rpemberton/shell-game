@@ -1,13 +1,15 @@
 {
-  "main.css": "/shell-game/static/css/main.ed203f9f.chunk.css",
-  "main.js": "/shell-game/static/js/main.3516a55c.chunk.js",
-  "main.js.map": "/shell-game/static/js/main.3516a55c.chunk.js.map",
-  "static/js/1.4a34e45d.chunk.js": "/shell-game/static/js/1.4a34e45d.chunk.js",
-  "static/js/1.4a34e45d.chunk.js.map": "/shell-game/static/js/1.4a34e45d.chunk.js.map",
-  "runtime~main.js": "/shell-game/static/js/runtime~main.d1f85537.js",
-  "runtime~main.js.map": "/shell-game/static/js/runtime~main.d1f85537.js.map",
-  "static/css/main.ed203f9f.chunk.css.map": "/shell-game/static/css/main.ed203f9f.chunk.css.map",
-  "index.html": "/shell-game/index.html",
-  "precache-manifest.d43976166a4a1bc292e1f0ec766db780.js": "/shell-game/precache-manifest.d43976166a4a1bc292e1f0ec766db780.js",
-  "service-worker.js": "/shell-game/service-worker.js"
+  "files": {
+    "main.css": "/shell-game/static/css/main.e9d88e52.chunk.css",
+    "main.js": "/shell-game/static/js/main.e525e5e3.chunk.js",
+    "main.js.map": "/shell-game/static/js/main.e525e5e3.chunk.js.map",
+    "runtime~main.js": "/shell-game/static/js/runtime~main.be5d1fe9.js",
+    "runtime~main.js.map": "/shell-game/static/js/runtime~main.be5d1fe9.js.map",
+    "static/js/2.c2695c00.chunk.js": "/shell-game/static/js/2.c2695c00.chunk.js",
+    "static/js/2.c2695c00.chunk.js.map": "/shell-game/static/js/2.c2695c00.chunk.js.map",
+    "index.html": "/shell-game/index.html",
+    "precache-manifest.ec774172a3f859c87ce0d11dfd8c8d91.js": "/shell-game/precache-manifest.ec774172a3f859c87ce0d11dfd8c8d91.js",
+    "service-worker.js": "/shell-game/service-worker.js",
+    "static/css/main.e9d88e52.chunk.css.map": "/shell-game/static/css/main.e9d88e52.chunk.css.map"
+  }
 }
